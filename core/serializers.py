@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers #Importar para conversao de dados em JSON
 from .models import Bucket, Card
 
 class CardSerializer(serializers.ModelSerializer):
