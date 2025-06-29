@@ -13,4 +13,8 @@ class CardViewSet(viewsets.ModelViewSet):
     serializer_class = CardSerializer
 
 def home_view(request):
-    return render(request, 'board/home.html')
+    buckets = Bucket.objects.all()
+    context = {
+        'buckets': buckets,
+    }
+    return render(request, 'board/home.html', context)
