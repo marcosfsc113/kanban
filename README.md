@@ -64,6 +64,9 @@ cd seu-repositorio
 ## 2. Crie e ative o ambiente virtual
 
 python -m venv venv
+
+Depois:
+
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
 
@@ -94,12 +97,26 @@ DATABASES = {
     }
 }
 
+Para sair: exit
+
+Lembre-se de se conectar ao banco:
+
+psql -U kanban_user -d board
+
+Dê permissão para o usuario kanban_user (para a criação de tabelas e etc)
+
+ALTER DATABASE kanban_db OWNER TO kanban_user;
+
+Para sair: exit
+
 ## 5. Aplique as migrações
 
 python manage.py makemigrations
 python manage.py migrate
 
 ## 6. (Opcional) Caso queira inserir dados teste
+
+ psql -U kanban_user -d kanban_db
 
 -- Inserir buckets (colunas do Kanban)
 INSERT INTO bucket (nome) VALUES
@@ -114,6 +131,8 @@ INSERT INTO card (nome_paciente, data_admissao, estado_civil, idade, sexo, bucke
 ('Maria Oliveira',   '2025-06-02', 'Casada',   38, 'Feminino',  2),
 ('Carlos Pereira',   '2025-06-03', 'Divorciado', 60, 'Masculino', 3),
 ('Ana Souza',        '2025-06-04', 'Viúva',    70, 'Feminino',  4);
+
+Para sair: exit
 
 ## 7. (Opcional) Crie um superusuário
 
