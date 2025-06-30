@@ -20,38 +20,7 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 - PostgreSQL  
 - HTML5, CSS3, JavaScript (vanilla)  
 - SortableJS (para arrastar os cards entre colunas)
-
----
-
-##  Como Rodar o Projeto Localmente
-
-### 1. Clone o repositório
-```bash
-git clone https://github.com/marcosfsc113/kanban
-cd seu-repositorio
-
-#  CarePlanner Kanban - Desafio Técnico
-
-Este projeto é uma aplicação web baseada em Django e Django REST Framework que permite a visualização e o gerenciamento de pacientes internados por meio de um quadro Kanban. Foi desenvolvido como solução para o desafio técnico da **vaga 2 - CarePlanner e Painéis**.
-
----
-
-##  Objetivo
-
-Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado hospitalar:
-
-**Pendente → Triagem → Plano de Cuidado → Alta**
-
----
-
-##  Tecnologias Utilizadas
-
-- Python 3.11  
-- Django 5.2  
-- Django REST Framework  
-- PostgreSQL  
-- HTML5, CSS3, JavaScript (vanilla)  
-- SortableJS (para arrastar os cards entre colunas)
+- Git
 
 ---
 
@@ -81,7 +50,10 @@ Antes de rodar as migrações, crie o banco e o usuário no PostgreSQL:
 psql -U postgres
 
 CREATE DATABASE kanban_db;
-CREATE USER kanban_user WITH PASSWORD '12345';
+
+Dê permissão para o usuario kanban_user (para a criação de tabelas e etc)
+
+ALTER DATABASE kanban_db OWNER TO kanban_user;
 GRANT ALL PRIVILEGES ON DATABASE kanban_db TO kanban_user;
 
 Esses dados já estão configurados no settings.py:
@@ -101,11 +73,7 @@ Para sair: exit
 
 Lembre-se de se conectar ao banco:
 
-psql -U kanban_user -d board
-
-Dê permissão para o usuario kanban_user (para a criação de tabelas e etc)
-
-ALTER DATABASE kanban_db OWNER TO kanban_user;
+psql -U kanban_user -d kanban_db
 
 Para sair: exit
 
@@ -118,15 +86,17 @@ python manage.py migrate
 
  psql -U kanban_user -d kanban_db
 
+ (Caso dê erro, vá até o pgAdmin e conecte-se com oo banco)
+
 -- Inserir buckets (colunas do Kanban)
-INSERT INTO bucket (nome) VALUES
+INSERT INTO board_bucket (nome) VALUES
 ('pendente'),
 ('triagem'),
 ('plano de cuidado'),
 ('alta');
 
 -- Inserir cards (pacientes), um por etapa
-INSERT INTO card (nome_paciente, data_admissao, estado_civil, idade, sexo, bucket_id) VALUES
+INSERT INTO board_card (nome_paciente, data_admissao, estado_civil, idade, sexo, bucket_id) VALUES
 ('João da Silva',    '2025-06-01', 'Solteiro', 45, 'Masculino', 1),
 ('Maria Oliveira',   '2025-06-02', 'Casada',   38, 'Feminino',  2),
 ('Carlos Pereira',   '2025-06-03', 'Divorciado', 60, 'Masculino', 3),
