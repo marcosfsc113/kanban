@@ -29,7 +29,9 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             margin-top: 0;
             margin-bottom: 0.5em;
             font-weight: 600;
@@ -91,7 +93,7 @@
             font-size: 1.8em;
         }
 
-        main > p:first-of-type {
+        main>p:first-of-type {
             text-align: center;
             margin-bottom: 50px;
             color: var(--light-text-color);
@@ -188,7 +190,7 @@
             font-size: 1.1em;
             opacity: 0.8;
         }
-        
+
         .blue-background-class {
             background-color: rgba(33, 150, 243, 0.2);
             border: 1px dashed var(--secondary-color);
@@ -202,26 +204,28 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            display: none; /* Começa escondida */
+            display: none;
+            /* Começa escondida */
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .modal-overlay.visible {
-            display: flex; /* Classe que a torna visível */
+            display: flex;
+            /* Classe que a torna visível */
         }
 
         .modal-content {
             background: white;
             padding: 30px 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             width: 90%;
             max-width: 600px;
             position: relative;
         }
-        
+
         .modal-close {
             position: absolute;
             top: 15px;
@@ -277,7 +281,7 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <p class="mensagem-vazio" {% if bucket.cards.all %}style="display: none;"{% endif %}>
+                <p class="mensagem-vazio" {% if bucket.cards.all %}style="display: none;" {% endif %}>
                     Sem pacientes!
                 </p>
             </div>
@@ -292,26 +296,26 @@
             <button id="modal-close-btn" class="modal-close">&times;</button>
             <h2 id="modal-title">Detalhes do Paciente</h2>
             <div id="modal-details-body">
-                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        
-            var modalOverlay = document.getElementById('card-modal-overlay'); 
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var modalOverlay = document.getElementById('card-modal-overlay');
             var modalTitle = document.getElementById('modal-title');//nome
             var modalDetailsBody = document.getElementById('modal-details-body');//botao
             var modalCloseBtn = document.getElementById('modal-close-btn');
             var cards = document.querySelectorAll('.card');
             var cardLists = document.querySelectorAll('.lista-card');
 
-            cards.forEach(function(cardElement) {
-               
-                cardElement.addEventListener('click', function() {
-                    
+            cards.forEach(function (cardElement) {
+
+                cardElement.addEventListener('click', function () {
+
                     var cardId = cardElement.dataset.cardId;
 
                     modalOverlay.classList.add('visible');
@@ -320,35 +324,35 @@
                     var url = '/api/cards/' + cardId + '/';
 
                     fetch(url)
-                        .then(function(response) {
+                        .then(function (response) {
                             if (!response.ok) {
                                 throw new Error('A resposta da API não foi OK. Status: ' + response.status);
                             }
                             return response.json();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             var dataAdmissao = new Date(data.data_admissao).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 
                             modalTitle.textContent = data.nome_paciente;
-                            modalDetailsBody.innerHTML = 
+                            modalDetailsBody.innerHTML =
                                 '<p><strong>ID do Paciente:</strong> ' + data.id + '</p>' +
                                 '<p><strong>Data de Admissão:</strong> ' + dataAdmissao + '</p>' +
                                 '<p><strong>Idade:</strong> ' + (data.idade || 'Não informada') + '</p>' +
                                 '<p><strong>Sexo:</strong> ' + (data.sexo || 'Não informado') + '</p>' +
                                 '<p><strong>Estado Civil:</strong> ' + (data.estado_civil || 'Não informado') + '</p>';
                         })
-                        .catch(function(error) {
+                        .catch(function (error) {
                             modalTitle.textContent = 'Erro';
                             modalDetailsBody.innerHTML = '<p style="color: red;">Não foi possível carregar os detalhes do paciente.</p>';
                         });
                 });
             });
 
-            modalCloseBtn.addEventListener('click', function() {
+            modalCloseBtn.addEventListener('click', function () {
                 modalOverlay.classList.remove('visible');
             });
             //Deixando os cards arrastaveis
-            cardLists.forEach(function(list) {
+            cardLists.forEach(function (list) {
                 updateEmptyMessageVisibility(list);
                 new Sortable(list, {
                     group: 'kanban',
@@ -363,7 +367,7 @@
 
                         var cardId = evt.item.dataset.cardId;
                         var newBucketId = evt.to.dataset.bucketId;
-                        
+
                         updateCardStatus(cardId, newBucketId); // salvar no bd
                     }
                 });
@@ -395,16 +399,17 @@
                 },
                 body: JSON.stringify({ bucket_id: newBucketId })
             })
-            .then(function(response) {
-                if (!response.ok) {
-                    throw new Error('Falha ao atualizar o card. Status: ' + response.status);
-                }
-                return response.json();
-            })
-            .catch(function(error) {
-                console.error('Erro ao mover o card:', error);
-            });
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Falha ao atualizar o card. Status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .catch(function (error) {
+                    console.error('Erro ao mover o card:', error);
+                });
         }
     </script>
 </body>
+
 </html>
