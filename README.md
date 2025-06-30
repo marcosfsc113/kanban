@@ -59,6 +59,7 @@ Antes de rodar as migrações, crie o banco e o usuário no PostgreSQL:
 psql -U postgres
 
 CREATE DATABASE kanban_db;
+CREATE USER kanban_user WITH PASSWORD '12345';
 
 Dê permissão para o usuario kanban_user (para a criação de tabelas e etc)
 
