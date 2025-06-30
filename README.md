@@ -105,12 +105,14 @@ python manage.py migrate
 
 -- Inserir buckets (colunas do Kanban)
 INSERT INTO board_bucket (nome) VALUES
+
 ('pendente'),
 ('triagem'),
 ('plano de cuidado'),
 ('alta');
 
 -- Inserir cards (pacientes), um por etapa
+
 INSERT INTO board_card (nome_paciente, data_admissao, estado_civil, idade, sexo, bucket_id) VALUES
 ('João da Silva',    '2025-06-01', 'Solteiro', 45, 'Masculino', 1),
 ('Maria Oliveira',   '2025-06-02', 'Casada',   38, 'Feminino',  2),
