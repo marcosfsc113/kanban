@@ -27,7 +27,7 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/marcosfsc113/kanban
 cd seu-repositorio
 
 #  CarePlanner Kanban - Desafio Técnico
