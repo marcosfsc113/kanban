@@ -63,8 +63,12 @@ CREATE USER kanban_user WITH PASSWORD '12345';
 
 Dê permissão para o usuario kanban_user (para a criação de tabelas e etc)
 
-ALTER DATABASE kanban_db OWNER TO kanban_user;
 GRANT ALL PRIVILEGES ON DATABASE kanban_db TO kanban_user;
+
+Caso  não funcione tornne o usuário o dono do bando de dados:
+
+ALTER DATABASE kanban_db OWNER TO kanban_user;
+
 
 Esses dados já estão configurados no settings.py:
 
