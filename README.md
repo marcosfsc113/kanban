@@ -27,7 +27,11 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 ##  Como Rodar o Projeto Localmente
 
 ### 1. Clone o repositório
+
+Vá até sua IDE e abra o terminal
+
 git clone https://github.com/seu-usuario/seu-repositorio.git
+
 cd seu-repositorio
 
 ## 2. Crie e ative o ambiente virtual
