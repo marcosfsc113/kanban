@@ -1,144 +1,103 @@
-# Desafio Técnico: Kanban CarePlanner
+#  CarePlanner Kanban - Desafio Técnico
 
-Descrição do Projeto
-O Kanban CarePlanner é uma aplicação web desenvolvida como solução para o Desafio Técnico para a Vaga 2. O objetivo é fornecer uma ferramenta visual, no estilo de um quadro Kanban, para que enfermeiros possam organizar e planejar o trabalho relacionado aos pacientes internados em sua ala. 
+Este projeto é uma aplicação web baseada em Django e Django REST Framework que permite a visualização e o gerenciamento de pacientes internados por meio de um quadro Kanban. Foi desenvolvido como solução para o desafio técnico da **vaga 2 - CarePlanner e Painéis**.
 
-A aplicação utiliza uma API REST construída com Django e um frontend interativo que permite visualizar e gerenciar o fluxo de pacientes através das etapas de cuidado: Pendente, Triagem, Plano de Cuidado e Alta. 
+---
 
-Funcionalidades Principais
+##  Objetivo
 
-Visualização em Kanban: Exibe todos os pacientes como cards organizados em colunas que representam as etapas do cuidado. 
+Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado hospitalar:
 
-Detalhes do Paciente: Ao clicar em um card, uma tela modal exibe os dados completos do paciente (nome, estado civil, idade, sexo e data de admissão). 
+**Pendente → Triagem → Plano de Cuidado → Alta**
 
-Movimentação Drag-and-Drop: Permite que o enfermeiro arraste e solte os cards de uma coluna para outra, atualizando o status do paciente em tempo real. 
+---
 
-Persistência de Dados: Todas as informações são armazenadas em um banco de dados relacional PostgreSQL. 
+##  Tecnologias Utilizadas
 
-Tecnologias Utilizadas
-Backend: Django, Django REST Framework
+- Python 3.11  
+- Django 5.2  
+- Django REST Framework  
+- PostgreSQL  
+- HTML5, CSS3, JavaScript (vanilla)  
+- SortableJS (para arrastar os cards entre colunas)
 
-Banco de Dados: PostgreSQL 
+---
 
-Frontend: HTML5, CSS3, JavaScript (vanilla)
+##  Como Rodar o Projeto Localmente
 
-Versionamento: Git e GitHub 
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
 
-Pré-requisitos
-Antes de começar, garanta que você tem os seguintes softwares instalados na sua máquina:
+#  CarePlanner Kanban - Desafio Técnico
 
-Python (versão 3.8 ou superior)
+Este projeto é uma aplicação web baseada em Django e Django REST Framework que permite a visualização e o gerenciamento de pacientes internados por meio de um quadro Kanban. Foi desenvolvido como solução para o desafio técnico da **vaga 2 - CarePlanner e Painéis**.
 
-Pip (gerenciador de pacotes do Python)
+---
 
-Git
+##  Objetivo
 
-PostgreSQL (servidor de banco de dados)
+Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado hospitalar:
 
-# Instalação e Configuração
-Siga os passos abaixo para configurar e rodar o projeto localmente.
+**Pendente → Triagem → Plano de Cuidado → Alta**
 
-# 1. Clonar o Repositório
+---
 
-Bash
+##  Tecnologias Utilizadas
 
-git clone (https://github.com/marcosfsc113/kanban.git)
+- Python 3.11  
+- Django 5.2  
+- Django REST Framework  
+- PostgreSQL  
+- HTML5, CSS3, JavaScript (vanilla)  
+- SortableJS (para arrastar os cards entre colunas)
 
-cd nome-do-repositorio
+---
 
-# 2. Criar e Ativar o Ambiente Virtual
-É uma boa prática criar um ambiente virtual para isolar as dependências do projeto.
+##  Como Rodar o Projeto Localmente
 
-Bash
+### 1. Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
 
-# Criar o ambiente
+## 2. Crie e ative o ambiente virtual
+
 python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
 
-# Ativar no Windows
-venv\Scripts\activate
-
-# Ativar no macOS/Linux
-source venv/bin/activate
-
-# 3. Instalar as Dependências
-Instale todas as bibliotecas Python necessárias com um único comando.
-
-Bash
+## 3. Instale as dependências
 
 pip install -r requirements.txt
-(Nota: Para criar o arquivo requirements.txt no seu projeto, rode pip freeze > requirements.txt)
 
-# 4. Configurar o Banco de Dados PostgreSQL
+## 4. Configure o banco de dados PostgreSQL
 
-Abra o seu cliente PostgreSQL (como o psql ou DBeaver).
+Crie o banco de dados com as seguintes configurações (já definidas em settings.py):
 
-Crie um novo banco de dados e um novo usuário para a aplicação.
+Banco: kanban_db
+Usuário: kanban_user
+Senha: 12345
+Host: localhost
+Porta: 5432
 
-SQL
+## 5. Aplique as migrações
 
-CREATE DATABASE kanban_db;
-
-CREATE USER kanban_user WITH PASSWORD 'sua_senha_segura';
-
-GRANT ALL PRIVILEGES ON DATABASE kanban_db TO kanban_user;
-
-# 5. Configurar as Variáveis de Ambiente
-
-No diretório raiz do projeto, renomeie o arquivo .env.example para .env.
-
-Abra o arquivo .env e preencha com as suas credenciais do banco de dados e uma nova SECRET_KEY.
-
-SECRET_KEY='django-insecure-sua-chave-secreta-aqui'
-
-DEBUG=True
-
-DB_NAME='kanban_db'
-
-DB_USER='kanban_user'
-
-DB_PASSWORD='sua_senha_segura'
-
-DB_HOST='localhost'
-
-DB_PORT='5432'
-
-# 6. Aplicar as Migrações
-Este comando irá criar todas as tabelas necessárias no seu banco de dados, baseado nos modelos Django. 
-
-
-Bash
-
+python manage.py makemigrations
 python manage.py migrate
 
-# 7. Criar um Superusuário
-
-Crie um usuário administrador para acessar o Django Admin.
-
-Bash
+## 6. (Opcional) Crie um superusuário
 
 python manage.py createsuperuser
 
-Siga as instruções para definir nome de usuário, e-mail e senha.
-
-# 8. (Opcional) Popular Dados Iniciais
-
-Para popular o quadro com as colunas padrão, você pode rodar o seguinte comando (se um script de seed for criado):
-
-Bash
-
-python manage.py seed_buckets
-
-Ou adicionar as colunas manualmente através do Django Admin (/admin).
-
-# 9. Rodar o Servidor de Desenvolvimento
-
-Tudo pronto! Inicie o servidor.
-
-Bash
+## 7. Inicie o servidor
 
 python manage.py runserver
 
-A aplicação estará disponível em http://127.0.0.1:8000/.
+## 8. Acesse no navegador:
 
-Documentação da API
-(Copie e cole aqui a s
+Quadro Kanban (interface): http://localhost:8000/
+
+Admin do Django: http://localhost:8000/admin/
+
+API RESTful: http://localhost:8000/api/
