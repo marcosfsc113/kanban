@@ -12,7 +12,7 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 
 ---
 
-##  Tecnologias Utilizadas
+##  Tecnologias Utilizadas 
 
 - Python 3.11  
 - Django 5.2  
@@ -22,6 +22,11 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 - SortableJS (para arrastar os cards entre colunas)
 - Git
 
+## Lembre-se de instalar
+
+- Python 3.11  
+- PostgreSQL
+- Git
 ---
 
 ##  Como Rodar o Projeto Localmente
