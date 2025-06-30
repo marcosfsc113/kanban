@@ -1,118 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-Vindo!</title>
     <style>
-        body {
-            font-family: 'Segoe UI';
-            margin: 0;
-            padding: 20px;
-            background-color: wheat;
-            color: #333
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary-color: #2196F3;
+            --text-color: #333;
+            --light-text-color: #555;
+            --background-light: #f8f9fa;
+            --card-background: #ffffff;
+            --bucket-background: #e9ecef;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --border-color: #ced4da;
         }
 
-        h1{
-            color: #2c3e50;
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1em;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: white;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+        }
+
+        nav a:hover {
+            color: #dcedc8;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        main {
+            padding: 0 40px 50px;
+        }
+
+        main h2 {
+            color: var(--primary-dark);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        main > p:first-of-type {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--light-text-color);
+            font-size: 1.1em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .modelo-kanban {
             display: flex;
             gap: 25px;
             overflow-x: auto;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             align-items: flex-start;
+            margin: 0 -20px;
+            padding: 0 20px;
         }
-        
+
         .bucket {
             flex-shrink: 0;
-            width: 320px;
-            background-color: blanchedalmond;
-            border-radius: 20px;
+            width: 20%;
+            background-color: var(--bucket-background);
+            border-radius: 12px;
             padding: 20px;
+            box-shadow: 0 8px 20px var(--shadow-light);
             display: flex;
             flex-direction: column;
-            min-height: 250px;
+            min-height: 300px;
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .bucket:hover {
+            box-shadow: 0 12px 25px var(--shadow-medium);
         }
 
         .bucket h2 {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            font-size: 1.6em;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
             text-align: center;
-            color: #3f51b5;
+            font-weight: 700;
         }
 
         .lista-card {
+            list-style: none;
+            padding: 0;
+            margin: 0;
             flex-grow: 1;
         }
 
         .card {
-            background-color: palegreen;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: 0.2 ease-in-out;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 10px var(--shadow-light);
+            transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
             cursor: pointer;
         }
 
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
         .card:hover {
-            transform: translate(-3px);
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px var(--shadow-medium);
         }
 
         .card h3 {
-            font-size: 1.1em;
+            margin: 0 0 8px 0;
+            font-size: 1.2em;
+            color: var(--text-color);
+            font-weight: 600;
         }
 
         .card p {
-            line-height: 1.4;
+            margin: 0;
+            font-size: 0.95em;
+            color: var(--light-text-color);
+            line-height: 1.5;
         }
 
-        .mensagem-vazio {
-            color: #777;
+        .mensagem-vazio,
+        .mensagem-nao-encontrado {
+            color: var(--light-text-color);
             text-align: center;
             font-style: italic;
+            padding-top: 30px;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        
+        .blue-background-class {
+            background-color: rgba(33, 150, 243, 0.2);
+            border: 1px dashed var(--secondary-color);
+        }
+
+        /* --- ESTILOS DA TELA MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; /* Começa escondida */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.visible {
+            display: flex; /* Classe que a torna visível */
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text-color);
+        }
+
+        #modal-details-body {
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
             padding-top: 20px;
         }
 
-        .mensagem-nao-encontrado {
-            text-align: center;
-            margin-top: 50px;
+        #modal-details-body p {
+            margin-bottom: 0.8em;
+            font-size: 1.1em;
         }
 
+        #modal-details-body p strong {
+            color: var(--primary-dark);
+            display: inline-block;
+            width: 120px;
+        }
     </style>
 </head>
+
 <body>
+    {% csrf_token %}
+
     <header>
         <h1>Kanban</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/api/">Acessar API</a></li>
-                <li><a href="/admin/">Acessar Admin</a></li>
-            </ul>
-        </nav>
     </header>
-    
+
     <main>
-        <h2>Bem-Vindo ao desafio Kanban!</h2>
-        <p>O servidor Django e a conexão com o PostgreSQL estão funcionando corretamente!</p>
         <div class="modelo-kanban">
             {% for bucket in buckets %}
             <div class="bucket">
-                <h2>{{ bucket.name }}</h2>
-                <ul class="lista-card">
+                <h2>{{ bucket.nome }}</h2>
+                <ul class="lista-card" data-bucket-id="{{ bucket.id }}">
                     {% for card in bucket.cards.all %}
-                    <li class="card">
-                        <h3>{{ card.title}}</h3>
-                        {% if card.description %}
-                            <p>{{ card.description|truncatechars:70}}</p>
-                        {% endif %}
+                    <li class="card" data-card-id="{{ card.id }}">
+                        <h3>{{ card.nome_paciente }}</h3>
+                        <p>{{ card.data_admissao|date:"d/m/Y" }}</p>
                     </li>
-                    {% empty %}
-                    <p class="mensagem-vazio">Nenhum card</p>
                     {% endfor %}
                 </ul>
+                <p class="mensagem-vazio" {% if bucket.cards.all %}style="display: none;"{% endif %}>
+                    Sem pacientes!
+                </p>
             </div>
             {% empty %}
             <p class="mensagem-nao-encontrado">Nada encontrado</p>
@@ -120,10 +287,124 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy;</p>
-        <a href="https://github.com/marcosfsc113">GitHub</a>
-    </footer>
-    
+    <div id="card-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close-btn" class="modal-close">&times;</button>
+            <h2 id="modal-title">Detalhes do Paciente</h2>
+            <div id="modal-details-body">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        
+            var modalOverlay = document.getElementById('card-modal-overlay'); 
+            var modalTitle = document.getElementById('modal-title');//nome
+            var modalDetailsBody = document.getElementById('modal-details-body');//botao
+            var modalCloseBtn = document.getElementById('modal-close-btn');
+            var cards = document.querySelectorAll('.card');
+            var cardLists = document.querySelectorAll('.lista-card');
+
+            cards.forEach(function(cardElement) {
+               
+                cardElement.addEventListener('click', function() {
+                    
+                    var cardId = cardElement.dataset.cardId;
+
+                    modalOverlay.classList.add('visible');
+
+
+                    var url = '/api/cards/' + cardId + '/';
+
+                    fetch(url)
+                        .then(function(response) {
+                            if (!response.ok) {
+                                throw new Error('A resposta da API não foi OK. Status: ' + response.status);
+                            }
+                            return response.json();
+                        })
+                        .then(function(data) {
+                            var dataAdmissao = new Date(data.data_admissao).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+                            modalTitle.textContent = data.nome_paciente;
+                            modalDetailsBody.innerHTML = 
+                                '<p><strong>ID do Paciente:</strong> ' + data.id + '</p>' +
+                                '<p><strong>Data de Admissão:</strong> ' + dataAdmissao + '</p>' +
+                                '<p><strong>Idade:</strong> ' + (data.idade || 'Não informada') + '</p>' +
+                                '<p><strong>Sexo:</strong> ' + (data.sexo || 'Não informado') + '</p>' +
+                                '<p><strong>Estado Civil:</strong> ' + (data.estado_civil || 'Não informado') + '</p>';
+                        })
+                        .catch(function(error) {
+                            modalTitle.textContent = 'Erro';
+                            modalDetailsBody.innerHTML = '<p style="color: red;">Não foi possível carregar os detalhes do paciente.</p>';
+                        });
+                });
+            });
+
+            modalCloseBtn.addEventListener('click', function() {
+                modalOverlay.classList.remove('visible');
+            });
+            //Deixando os cards arrastaveis
+            cardLists.forEach(function(list) {
+                updateEmptyMessageVisibility(list);
+                new Sortable(list, {
+                    group: 'kanban',
+                    animation: 150,
+                    onEnd: function (evt) {
+                        updateEmptyMessageVisibility(evt.from); // verificando a coluna de origem
+                        updateEmptyMessageVisibility(evt.to);   // verificando a coluna de destino
+
+                        if (evt.from === evt.to) {
+                            return;
+                        }
+
+                        var cardId = evt.item.dataset.cardId;
+                        var newBucketId = evt.to.dataset.bucketId;
+                        
+                        updateCardStatus(cardId, newBucketId); // salvar no bd
+                    }
+                });
+            });
+        });
+
+        function updateEmptyMessageVisibility(listElement) {
+            var bucket = listElement.closest('.bucket');
+            var emptyMessage = bucket.querySelector('.mensagem-vazio');
+            var hasCards = listElement.querySelector('.card') !== null;
+
+            if (hasCards) {
+                emptyMessage.style.display = 'none';
+            } else {
+                emptyMessage.style.display = 'block';
+            }
+        }
+
+        //salvar a mudança de status do card na API
+        function updateCardStatus(cardId, newBucketId) {
+            var url = '/api/cards/' + cardId + '/update_status/';
+            var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ bucket_id: newBucketId })
+            })
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Falha ao atualizar o card. Status: ' + response.status);
+                }
+                return response.json();
+            })
+            .catch(function(error) {
+                console.error('Erro ao mover o card:', error);
+            });
+        }
+    </script>
 </body>
 </html>
