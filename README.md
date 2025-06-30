@@ -35,9 +35,9 @@ Permitir que o enfermeiro organize os pacientes em diferentes etapas do cuidado 
 
 Vá até sua IDE e abra o terminal
 
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/marcosfsc113/kanban
 
-cd seu-repositorio
+cd kanban
 
 ## 2. Crie e ative o ambiente virtual
 
